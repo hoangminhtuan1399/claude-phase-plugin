@@ -1,0 +1,14 @@
+{
+  "name": "phase-workflow",
+  "owner": {
+    "name": "Net"
+  },
+  "description": "Marketplace chứa plugin phase-workflow.",
+  "plugins": [
+    {
+      "name": "phase-workflow",
+      "source": "./",
+      "description": "Lập phase gồm nhiều ticket (/phase-workflow:feature-request), chạy song song bằng subagent trong git worktree (/phase-workflow:start-phase) và xem tiến độ (/phase-workflow:phase-status)."
+    }
+  ]
+}
