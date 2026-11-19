@@ -8,7 +8,7 @@
     {
       "name": "phase-workflow",
       "source": "./",
-      "description": "Lập phase gồm nhiều ticket (/phase-workflow:feature-request), chạy song song bằng subagent trong git worktree (/phase-workflow:start-phase) và xem tiến độ (/phase-workflow:phase-status)."
+      "description": "Lập phase gồm nhiều ticket và test case (/phase-workflow:feature-request), chạy song song bằng subagent có review và QA trong git worktree (/phase-workflow:start-phase), merge qua hàng đợi (/phase-workflow:merge-phase) và xem tiến độ (/phase-workflow:phase-status)."
     }
   ]
 }

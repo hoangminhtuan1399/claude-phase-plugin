@@ -1,7 +1,7 @@
 {
   "name": "phase-workflow",
-  "version": "1.0.0",
-  "description": "Lập kế hoạch một tính năng thành phase gồm nhiều ticket, rồi chạy song song từng ticket trong git worktree riêng bằng subagent, mỗi ticket thành một commit trên nhánh phase.",
+  "version": "1.1.0",
+  "description": "Lập kế hoạch một tính năng thành phase gồm nhiều ticket và test case, chạy song song từng ticket trong git worktree riêng bằng subagent (có review và QA), mỗi ticket thành một commit trên nhánh phase, rồi merge từng phase vào nhánh gốc qua hàng đợi.",
   "author": {
     "name": "Net"
   },

@@ -26,6 +26,8 @@ Skill này **chỉ đọc**: không sửa file, không chạy lệnh git làm th
    - Ticket đang làm. Nếu không có phiên `/phase-workflow:start-phase` nào đang chạy, đây là ticket bị dừng giữa chừng: `/phase-workflow:start-phase` sẽ tiếp tục chúng.
    - Ticket bị chặn: lý do và câu hỏi đang chờ người dùng trả lời.
    - Việc tiếp theo: những ticket sẵn sàng, hoặc nhắc chạy `/phase-workflow:start-phase <slug>`. Nếu phase đã xong hết, nhắc chạy `/phase-workflow:start-phase <slug>` để chạy kiểm tra cuối phase, nếu chưa chạy.
+   - Phase đã xong hết ticket: nếu chưa `đã merge`, nhắc chạy `/phase-workflow:merge-phase <slug>` sau khi người dùng duyệt. Phase `đã merge` thì chỉ báo là đã vào nhánh gốc.
+   - Chồng chéo giữa các phase đang chạy: `node "${CLAUDE_PLUGIN_ROOT}/scripts/phase-state.mjs" --overlaps <slug>` (chỉ khi người dùng hỏi hoặc có nhiều phase cùng chạy).
    - Cảnh báo của script (ví dụ phụ thuộc vào ticket không tồn tại), nếu có.
 
 3. Nếu người dùng hỏi chi tiết một ticket, đọc file ticket:
@@ -41,3 +43,5 @@ Skill này **chỉ đọc**: không sửa file, không chạy lệnh git làm th
 - **đang làm**: nhánh `ticket/<slug>/<id>` tồn tại.
 - **sẵn sàng**: mọi ticket phụ thuộc đã xong.
 - **chờ**: còn ticket phụ thuộc chưa xong.
+- **đã merge**: nhánh `phase/<slug>` là tổ tiên của nhánh gốc.
+- Ticket đang làm có thể đang chờ review (worker đã xong, reviewer đang đọc). Số lần reviewer trả lại hiện ở dòng chi tiết của ticket.

@@ -25,10 +25,10 @@ Những gì tra được trong code thì tự tra, không hỏi.
 2. Theo mode:
    - `new`: bắt đầu từ đầu.
    - `resume`: xem `git log PB..HEAD` và `git status`/`git diff` trước, rồi làm tiếp phần còn dở. Không làm lại từ đầu.
-   - `fix`: đọc lỗi trong prompt và sửa.
+   - `fix`: đọc lỗi trong prompt và sửa. Nếu ghi chú là danh sách finding của reviewer, sửa **từng finding** `blocker` và `major` (kèm test hồi quy khi hợp lý) và đừng đụng tới phần reviewer không nêu. Không đồng ý với một finding thì vẫn nêu lý do ở `NOTES`, đừng bỏ qua im lặng.
    - `conflict`: chạy `git rebase <nhánh phase>`, giải quyết xung đột sao cho giữ đúng ý đồ của cả hai phía, rồi `git rebase --continue`. Nếu xung đột cần quyết định về hành vi, `git rebase --abort` rồi trả BLOCKED.
 3. Chuẩn bị môi trường. Worktree mới chưa có dependency (ví dụ `node_modules`, `.venv`): nếu chưa có, chạy các lệnh trong mục "Môi trường" của PHASE.md.
-4. Viết code và test theo đúng quy ước của repo, tìm và dùng lại code có sẵn trước khi viết mới.
+4. Viết code và test theo đúng quy ước của repo, tìm và dùng lại code có sẵn trước khi viết mới. Mục "Test case của ticket" là hợp đồng nghiệm thu: mỗi test case loại `auto` phải có test tự động tương ứng, và code phải đáp ứng cả các case `ui`/`manual`. Ticket có độ phức tạp `simple` sẽ không qua reviewer, nên tự kiểm tra kỹ hơn: đọc lại `git diff` trước khi báo xong.
 5. Chạy **tất cả** lệnh trong mục "Kiểm tra" của ticket, cộng với lint/format cho những file bạn đã sửa (theo CLAUDE.md). Sửa đến khi qua. Nếu sau nhiều lần vẫn không qua vì lý do nằm ngoài ticket, trả `FAILED`.
 6. Commit mọi thay đổi vào nhánh ticket (`git add -A && git commit -m "wip: <id> ..."`). Commit nhiều lần cũng được: người điều phối sẽ gộp lại thành một. Đến khi trả kết quả, `git status --porcelain` phải rỗng.
 
@@ -40,5 +40,8 @@ SUMMARY: <1-3 câu: đã làm gì>
 FILES: <danh sách file đã sửa/tạo>
 VERIFICATION: <từng lệnh đã chạy và kết quả: pass/fail>
 QUESTIONS: <chỉ khi BLOCKED: danh sách câu hỏi, kèm phương án>
-NOTES: <rủi ro, việc ngoài phạm vi đã phát hiện, hoặc "không có">
+NOTES: <rủi ro, việc ngoài phạm vi đã phát hiện, lý do không đồng ý với finding của reviewer (nếu có), hoặc "không có">
+RULE_CANDIDATE: <nếu bạn thấy một lỗi/anti-pattern lặp lại có thể bắt bằng lint rule, type hay test, nêu cách; hoặc "không có">
 ```
+
+Chỉ trả `STATUS: DONE` khi đã chạy đủ lệnh kiểm tra và chúng đều qua.
